@@ -1,0 +1,277 @@
+
+MariaDB [test]> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| customer       |
+| emp_details    |
++----------------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]> create table emp(id varchar(30), name varchar(30), mob varchar(3
+0));
+Query OK, 0 rows affected (0.26 sec)
+
+MariaDB [test]> insert into emp values(1, "Dina", 8787);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [test]> insert into emp values(2, "devi", 6767);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [test]> select * from emp;
++------+------+------+
+| id   | name | mob  |
++------+------+------+
+| 1    | Dina | 8787 |
+| 2    | devi | 6767 |
++------+------+------+
+2 rows in set (0.00 sec)
+
+
+MariaDB [test]> create table salary( id varchar(30), name varchar(30), amount va
+rchar(30));
+Query OK, 0 rows affected (0.24 sec)
+
+MariaDB [test]> insert into salary values(1, "Dina", 15000);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [test]> insert into salary values(2, "Ramesh", 20000);
+Query OK, 1 row affected (0.09 sec)
+
+MariaDB [test]> insert into salary values(3, "devi", 22000);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [test]> insert into salary values(4, "karthik", 24000);
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [test]> insert into salary values(5, "Tamil", 26000);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [test]> select * from salary;
++------+---------+--------+
+| id   | name    | amount |
++------+---------+--------+
+| 1    | Dina    | 15000  |
+| 2    | Ramesh  | 20000  |
+| 3    | devi    | 22000  |
+| 4    | karthik | 24000  |
+| 5    | Tamil   | 26000  |
++------+---------+--------+
+5 rows in set (0.00 sec)
+
+
+MariaDB [test]> select count(name) from salary;
++-------------+
+| count(name) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select sum(amount) from salary;
++-------------+
+| sum(amount) |
++-------------+
+|      107000 |
++-------------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select avg(amount) from salary;
++-------------+
+| avg(amount) |
++-------------+
+|       21400 |
++-------------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> alter table salary add amount1 varchar(30) after amount;
+Query OK, 0 rows affected (0.49 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> update salary set amount1="20000" where id=1;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [test]> update salary set amount1="2000" where id=2;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [test]> update salary set amount1="3000" where id=3;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [test]> update salary set amount1="2000" where id=4;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [test]> update salary set amount1="1000" where id=5;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [test]> select * from salary;
++------+---------+--------+---------+
+| id   | name    | amount | amount1 |
++------+---------+--------+---------+
+| 1    | Dina    | 15000  | 20000   |
+| 2    | Ramesh  | 20000  | 2000    |
+| 3    | devi    | 22000  | 3000    |
+| 4    | karthik | 24000  | 2000    |
+| 5    | Tamil   | 26000  | 1000    |
++------+---------+--------+---------+
+5 rows in set (0.00 sec)
+
+
+MariaDB [test]> select sum(salary.amount+salary.amount1) as total from salary;
++--------+
+| total  |
++--------+
+| 135000 |
++--------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select sum(salary.amount-salary.amount1) as total from salary;
++-------+
+| total |
++-------+
+| 79000 |
++-------+
+1 row in set (0.00 sec)
+
+
+------------------------------------Union, Joins-----------------------------------------
+
+
+
+Setting environment for using XAMPP for Windows.
+PayilagamServer@PAYILAGAM c:\xampp
+# mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 112
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use test;
+Database changed
+MariaDB [test]> select * from emp union select * from salary;
+ERROR 1222 (21000): The used SELECT statements have a different number of column
+s
+MariaDB [test]> select id, name from emp union select name, id from salary;
++---------+------+
+| id      | name |
++---------+------+
+| 1       | Dina |
+| 2       | devi |
+| Dina    | 1    |
+| Ramesh  | 2    |
+| devi    | 3    |
+| karthik | 4    |
+| Tamil   | 5    |
++---------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [test]> select id, name from emp union all  select name, id from salary;
+
++---------+------+
+| id      | name |
++---------+------+
+| 1       | Dina |
+| 2       | devi |
+| Dina    | 1    |
+| Ramesh  | 2    |
+| devi    | 3    |
+| karthik | 4    |
+| Tamil   | 5    |
++---------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp join salary on emp.name=salary.name;
++------+------+------+------+------+--------+---------+
+| id   | name | mob  | id   | name | amount | amount1 |
++------+------+------+------+------+--------+---------+
+| 1    | Dina | 8787 | 1    | Dina | 15000  | 20000   |
+| 2    | devi | 6767 | 3    | devi | 22000  | 3000    |
++------+------+------+------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp inner  join salary on emp.name=salary.name;
++------+------+------+------+------+--------+---------+
+| id   | name | mob  | id   | name | amount | amount1 |
++------+------+------+------+------+--------+---------+
+| 1    | Dina | 8787 | 1    | Dina | 15000  | 20000   |
+| 2    | devi | 6767 | 3    | devi | 22000  | 3000    |
++------+------+------+------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp left  join salary on emp.name=salary.name;
++------+------+------+------+------+--------+---------+
+| id   | name | mob  | id   | name | amount | amount1 |
++------+------+------+------+------+--------+---------+
+| 1    | Dina | 8787 | 1    | Dina | 15000  | 20000   |
+| 2    | devi | 6767 | 3    | devi | 22000  | 3000    |
++------+------+------+------+------+--------+---------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp right  join salary on emp.name=salary.name;
++------+------+------+------+---------+--------+---------+
+| id   | name | mob  | id   | name    | amount | amount1 |
++------+------+------+------+---------+--------+---------+
+| 1    | Dina | 8787 | 1    | Dina    | 15000  | 20000   |
+| 2    | devi | 6767 | 3    | devi    | 22000  | 3000    |
+| NULL | NULL | NULL | 2    | Ramesh  | 20000  | 2000    |
+| NULL | NULL | NULL | 4    | karthik | 24000  | 2000    |
+| NULL | NULL | NULL | 5    | Tamil   | 26000  | 1000    |
++------+------+------+------+---------+--------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [test]> insert into emp values(3,"partha",797897);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [test]> select * from emp;
++------+--------+--------+
+| id   | name   | mob    |
++------+--------+--------+
+| 1    | Dina   | 8787   |
+| 2    | devi   | 6767   |
+| 3    | partha | 797897 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp left  join salary on emp.name=salary.name;
++------+--------+--------+------+------+--------+---------+
+| id   | name   | mob    | id   | name | amount | amount1 |
++------+--------+--------+------+------+--------+---------+
+| 1    | Dina   | 8787   | 1    | Dina | 15000  | 20000   |
+| 2    | devi   | 6767   | 3    | devi | 22000  | 3000    |
+| 3    | partha | 797897 | NULL | NULL | NULL   | NULL    |
++------+--------+--------+------+------+--------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp left outer join salary on emp.name=salary.name
+;
++------+--------+--------+------+------+--------+---------+
+| id   | name   | mob    | id   | name | amount | amount1 |
++------+--------+--------+------+------+--------+---------+
+| 1    | Dina   | 8787   | 1    | Dina | 15000  | 20000   |
+| 2    | devi   | 6767   | 3    | devi | 22000  | 3000    |
+| 3    | partha | 797897 | NULL | NULL | NULL   | NULL    |
++------+--------+--------+------+------+--------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp right outer join salary on emp.name=salary.nam
+e;
++------+------+------+------+---------+--------+---------+
+| id   | name | mob  | id   | name    | amount | amount1 |
++------+------+------+------+---------+--------+---------+
+| 1    | Dina | 8787 | 1    | Dina    | 15000  | 20000   |
+| 2    | devi | 6767 | 3    | devi    | 22000  | 3000    |
+| NULL | NULL | NULL | 2    | Ramesh  | 20000  | 2000    |
+| NULL | NULL | NULL | 4    | karthik | 24000  | 2000    |
+| NULL | NULL | NULL | 5    | Tamil   | 26000  | 1000    |
++------+------+------+------+---------+--------+---------+
+5 rows in set (0.00 sec)
+
+
+

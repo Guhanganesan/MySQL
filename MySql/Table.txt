@@ -1,0 +1,67 @@
+# mysql
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| test               |
++--------------------+
+
+
+MariaDB [(none)]> use test;
+
+
+MariaDB [test]> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| emp_details    |
+| salary         |
++----------------+
+
+
+MariaDB [test]> create table payilagam (id varchar(30), name varchar(30), course
+ varchar(30));
+
+
+MariaDB [test]> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| emp_details    |
+| payilagam      |
+| salary         |
++----------------+
+
+
+MariaDB [test]> insert into payilagam values("py1", "Rajesh", "PHP");
+
+MariaDB [test]> describe payilagam;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | varchar(30) | YES  |     | NULL    |       |
+| name   | varchar(30) | YES  |     | NULL    |       |
+| course | varchar(30) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
+
+MariaDB [test]> select * from payilagam;
++------+--------+--------+
+| id   | name   | course |
++------+--------+--------+
+| py1  | Rajesh | PHP    |
++------+--------+--------+
+
+
+MariaDB [test]> select id, name from payilagam;
++------+--------+
+| id   | name   |
++------+--------+
+| py1  | Rajesh |
++------+--------+
+
+
+
+

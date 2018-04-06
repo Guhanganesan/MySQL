@@ -1,0 +1,154 @@
+
+Setting environment for using XAMPP for Windows.
+PayilagamServer@PAYILAGAM c:\xampp
+# mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use test
+Database changed
+MariaDB [test]> create table m1 ( id int auto_increment, name varchar(30), count
+ry varchar(30) default "India", primary key(id));
+Query OK, 0 rows affected (0.25 sec)
+
+MariaDB [test]> describe m1;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(30) | YES  |     | NULL    |                |
+| country | varchar(30) | YES  |     | India   |                |
++---------+-------------+------+-----+---------+----------------+
+3 rows in set (0.02 sec)
+
+MariaDB [test]> insert into m1 values("", "Guhan", "");
+Query OK, 1 row affected, 1 warning (0.08 sec)
+
+MariaDB [test]> select * from m1;
++----+-------+---------+
+| id | name  | country |
++----+-------+---------+
+|  1 | Guhan |         |
++----+-------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> insert into m1 values("", "Guhan");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [test]>  insert into m1 values("","Anbu" );
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    9
+Current database: test
+
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [test]> mysql
+    -> use test;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near 'mys
+ql
+use test' at line 1
+MariaDB [test]>  insert into m1 values("","Anbu" );
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [test]>  insert into m1 values("","Anbu","");
+Query OK, 1 row affected, 1 warning (0.08 sec)
+
+MariaDB [test]> select * from m1;
++----+-------+---------+
+| id | name  | country |
++----+-------+---------+
+|  1 | Guhan |         |
+|  2 | Anbu  |         |
++----+-------+---------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]>  insert into m1 values("","Anbu",null);
+Query OK, 1 row affected, 1 warning (0.07 sec)
+
+MariaDB [test]> select * from m1;
++----+-------+---------+
+| id | name  | country |
++----+-------+---------+
+|  1 | Guhan |         |
+|  2 | Anbu  |         |
+|  3 | Anbu  | NULL    |
++----+-------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [test]>  insert into m1(id,name) values("","Anbu");
+Query OK, 1 row affected, 1 warning (0.09 sec)
+
+MariaDB [test]> select * from m1;
++----+-------+---------+
+| id | name  | country |
++----+-------+---------+
+|  1 | Guhan |         |
+|  2 | Anbu  |         |
+|  3 | Anbu  | NULL    |
+|  4 | Anbu  | India   |
++----+-------+---------+
+4 rows in set (0.00 sec)
+
+MariaDB [test]> alter table m1 modify name varchar(30) unique;
+ERROR 1062 (23000): Duplicate entry 'Anbu' for key 'name'
+MariaDB [test]> alter table m1 add mob varchar(30) after country;
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> select * from m1;
++----+-------+---------+------+
+| id | name  | country | mob  |
++----+-------+---------+------+
+|  1 | Guhan |         | NULL |
+|  2 | Anbu  |         | NULL |
+|  3 | Anbu  | NULL    | NULL |
+|  4 | Anbu  | India   | NULL |
++----+-------+---------+------+
+4 rows in set (0.00 sec)
+
+MariaDB [test]> alter table m1 modify mob varchar(30) unique
+    -> ;
+Query OK, 0 rows affected (0.27 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> insert into m1(id, name,country) values("", "Raja","979181");
+Query OK, 1 row affected, 1 warning (0.09 sec)
+
+MariaDB [test]> select * from m1;
++----+-------+---------+------+
+| id | name  | country | mob  |
++----+-------+---------+------+
+|  1 | Guhan |         | NULL |
+|  2 | Anbu  |         | NULL |
+|  3 | Anbu  | NULL    | NULL |
+|  4 | Anbu  | India   | NULL |
+|  5 | Raja  | 979181  | NULL |
++----+-------+---------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [test]> insert into m1(id, name,mob) values("", "Raja","979181");
+Query OK, 1 row affected, 1 warning (0.08 sec)
+
+MariaDB [test]> select * from m1;
++----+-------+---------+--------+
+| id | name  | country | mob    |
++----+-------+---------+--------+
+|  1 | Guhan |         | NULL   |
+|  2 | Anbu  |         | NULL   |
+|  3 | Anbu  | NULL    | NULL   |
+|  4 | Anbu  | India   | NULL   |
+|  5 | Raja  | 979181  | NULL   |
+|  6 | Raja  | India   | 979181 |
++----+-------+---------+--------+
+6 rows in set (0.00 sec)
+
+MariaDB [test]> insert into m1(id, name,country) values("", "Dev","979181");
+Query OK, 1 row affected, 1 warning (0.07 sec)
+
+MariaDB [test]> insert into m1(id, name,mob) values("", "Dev","979181");
+ERROR 1062 (23000): Duplicate entry '979181' for key 'mob'
+MariaDB [test]>

@@ -1,0 +1,78 @@
+MariaDB [(none)]> use test;
+Database changed
+MariaDB [test]> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| customer       |
+| data           |
+| emp            |
+| emp_details    |
+| myv1           |
+| salary         |
++----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [test]> select * from data;
++------+--------+---------+------+--------+
+| id   | name   | mobile  | age  | course |
++------+--------+---------+------+--------+
+| 1    | muruga | 8968698 | 27   | PHP    |
++------+--------+---------+------+--------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select * from customer;
++----+-------+-------+
+| id | name  | mob   |
++----+-------+-------+
+|  1 | Guhan | 97981 |
+|  2 | Anbu  | 87657 |
++----+-------+-------+
+2 rows in set (0.18 sec)
+
+------------------------------------CLONE-----------------------------------
+
+MariaDB [test]> insert into data(id, name, mobile) select id, name, mob from cus
+tomer;
+Query OK, 2 rows affected (0.06 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> select * from data;
++------+--------+---------+------+--------+
+| id   | name   | mobile  | age  | course |
++------+--------+---------+------+--------+
+| 1    | muruga | 8968698 | 27   | PHP    |
+| 1    | Guhan  | 97981   | NULL | NULL   |
+| 2    | Anbu   | 87657   | NULL | NULL   |
++------+--------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [test]> select * from emp;
++------+--------+--------+
+| id   | name   | mob    |
++------+--------+--------+
+| 1    | Dina   | 8787   |
+| 2    | devi   | 6767   |
+| 3    | partha | 797897 |
++------+--------+--------+
+3 rows in set (0.07 sec)
+
+MariaDB [test]> insert into emp(id, name, mobile) select id, name, mob from cust
+omer;
+
+Query OK, 2 rows affected (0.09 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> select * from emp;
++------+--------+--------+
+| id   | name   | mob    |
++------+--------+--------+
+| 1    | Dina   | 8787   |
+| 2    | devi   | 6767   |
+| 3    | partha | 797897 |
+| 1    | Guhan  | 97981  |
+| 2    | Anbu   | 87657  |
++------+--------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [test]>
