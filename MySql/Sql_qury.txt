@@ -1,0 +1,135 @@
+# mysql
+
+MariaDB [(none)]> show databases;
+
+
+MariaDB [(none)]> use test;
+
+
+=> show tables;
+
+=> create table payilagam (id varchar(30), name varchar(30), course
+ varchar(30));
+
+=> show tables;
+
+
+=> insert into payilagam values("py1", "Rajesh", "PHP");
+
+=> describe payilagam;
+
+=> select * from payilagam;
+
+=> select id, name from payilagam;
+---------------------------------------------------------------------------
+
+=> select * from payilagam1;
+
+=> alter table payilagam1 add mob varchar(30) after course;
+
+=> describe payilagam1;
+
+=> alter table payilagam1 add SlNo varchar(30) first;
+
+
+=> select * from payilagam1;
+
+=> update payilagam1 set SlNo=1 where id="py1";
+
+
+=> update payilagam1 set SlNo=2 where id="py2";
+
+
+=> select * from payilagam1;
+
+=> alter table payilagam1 change SlNo No varchar(30);
+
+
+=> describe payilagam1;
+
+=> update payilagam1 set mob=868969 where id="py1";
+
+
+=> update payilagam1 set mob=65875 where id="py2";
+
+=> select * from payilagam1;
+
+=> alter table payilagam1 modify mob varchar(50);
+
+=> describe payilagam1;
+
+=> alter table payilagam1 drop column mob;
+
+=> select * from payilagam1;
+
+=> alter table payilagam1 change column name trainee varchar(30);
+
+=> select * from payilagam1;
+
+=> truncate table payilagam1;
+
+
+=> select * from payilagam1;
+
+
+=> describe payilagam1;
+
+=> insert into payilagam1 values(1, "py1", "Naveen", "Java");
+
+
+=> insert into payilagam1 values(2, "py2", "Kumar", "PHP");
+
+
+=> update payilagam1 set trainee="Anbu", course="PHP" where id="py1";
+
+
+=> delete from payilagam1 where id="py2";
+
+
+=> update payilagam1 set course=null where id="py1";
+
+
+=> select * from payilagam1;
+
+-------------------------------------------------------------------
+
+=> insert into payilagam1 values(4, "py3", "Kumar", "Android");
+Query OK, 1 row affected (0.07 sec)
+
+=> insert into payilagam1 values(5, "py5", "Anbu", "Php");
+Query OK, 1 row affected (0.31 sec)
+
+=> select distinct trainee from payilagam1;
+
+=> select distinct trainee, course from payilagam1;
+
+=> select trainee from payilagam1 where (trainee="kathir") or (trai
+nee="kumar");
+
+=> select trainee from payilagam1 order by course;
+
+
+=> select trainee from payilagam1 where trainee like "%a";
+Empty set (0.00 sec)
+
+=> select trainee from payilagam1 where trainee like "a%";
+
+
+=> select trainee from payilagam1 where trainee like "%ar";
+
+
+=> select trainee from payilagam1 where trainee like "%th%";
+
+
+=> select trainee from payilagam1 where trainee like "_____";
+
+
+=> select trainee, count(*) from payilagam1;
+
+
+=> select trainee, count(*) from payilagam1 group by trainee;
+
+-----------------------------------------------------------------------------
+
+
+
