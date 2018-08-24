@@ -17,6 +17,8 @@ A) NOT NULL:
 			
 The NULL value can be surprising until you get used to it. Conceptually, NULL means “a missing unknown value” and it is treated somewhat differently from other values. ... In MySQL, 0 or NULL means false and anything else means true. The default truth value from a boolean operation is 1 .
 
+Null (or NULL) is a special marker used in Structured Query Language to indicate that a data value does not exist in the database. Introduced by the creator of the relational database model, E. F. ... Codd also introduced the use of the lowercase Greek omega (ω) symbol to represent Null in database theory.
+
 
 MariaDB [(none)]> use test;
 Database changed
