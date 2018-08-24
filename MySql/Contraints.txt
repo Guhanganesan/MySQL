@@ -14,6 +14,7 @@ table level constraints are applied to the entire table.
 
 A) NOT NULL:
 			-> column can not contain any NULL value. MySQL NOT NULL can be used to CREATE and ALTER a table.
+SQL NOT NULL Constraint. By default, a column can hold NULL values. The NOT NULL constraint enforces a column to NOT accept NULL values. This enforces a field to always contain a value, which means that you cannot insert a new record, or update a record without adding a value to this field.
 			
 The NULL value can be surprising until you get used to it. Conceptually, NULL means “a missing unknown value” and it is treated somewhat differently from other values. ... In MySQL, 0 or NULL means false and anything else means true. The default truth value from a boolean operation is 1 .
 
