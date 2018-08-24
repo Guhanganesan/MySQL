@@ -14,6 +14,9 @@ table level constraints are applied to the entire table.
 
 A) NOT NULL:
 			-> column can not contain any NULL value. MySQL NOT NULL can be used to CREATE and ALTER a table.
+			
+The NULL value can be surprising until you get used to it. Conceptually, NULL means “a missing unknown value” and it is treated somewhat differently from other values. ... In MySQL, 0 or NULL means false and anything else means true. The default truth value from a boolean operation is 1 .
+
 
 MariaDB [(none)]> use test;
 Database changed
