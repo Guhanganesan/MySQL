@@ -155,4 +155,35 @@ mysql> select trim("  guhan ganesan  ");
 +---------------------------+
 1 row in set (0.00 sec)
 
-mysql>
+mysql> select replace("guhan ganesan","guhan","anbu");
++-----------------------------------------+
+| replace("guhan ganesan","guhan","anbu") |
++-----------------------------------------+
+| anbu ganesan                            |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select reverse("chennai");
++--------------------+
+| reverse("chennai") |
++--------------------+
+| iannehc            |
++--------------------+
+1 row in set (0.05 sec)
+
+mysql> select concat("he", "is", "my","frnd");
++---------------------------------+
+| concat("he", "is", "my","frnd") |
++---------------------------------+
+| heismyfrnd                      |
++---------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat("he", "is", "my","frnd") as data;
++------------+
+| data       |
++------------+
+| heismyfrnd |
++------------+
+1 row in set (0.00 sec)
+
