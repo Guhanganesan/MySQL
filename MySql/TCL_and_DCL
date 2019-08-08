@@ -123,3 +123,13 @@ MariaDB [mydb]> select * from t2;
 3 rows in set (0.001 sec)
 
 MariaDB [mydb]>
+-------------------- --------------------------
+DCL:-
+Grant and Revoke:-
+
+create user 'myuser'@'localhost' identified by '1234';
+show databases;
+create database mydb;
+grant select, update, delete, insert on mydb.* to 'myuser'@'localhost';
+show grants for 'myuser'@'localhost';
+revoke delete on mydb.* from 'myuser'@'localhost';
