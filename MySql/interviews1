@@ -1,3 +1,8 @@
 select num from table where ( num % 2 ) = 0
 select distinct(city) from station where (id%2)=0
 
+select 
+sum(Orders.amount), Customers.customer_id
+from Customers 
+join Orders where Customers.customer_id=Orders.customer_id
+group by Customers.customer_id;
